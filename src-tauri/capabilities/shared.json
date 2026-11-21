@@ -1,0 +1,11 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "shared",
+  "description": "WeekLoom capabilities shared by the main and quick-capture windows",
+  "windows": ["main", "quick-capture"],
+  "permissions": [
+    "core:default",
+    "core:event:default",
+    "clipboard-manager:allow-write-text"
+  ]
+}

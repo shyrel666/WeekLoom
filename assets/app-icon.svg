@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- macOS-safe centered squircle plate (824x824 at 100,100) -->
+  <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="#262522" />
+
+  <!--
+    WeekLoom Interwoven Folded "W"
+    Pure flat vector geometry: uniform ribbon width (96px), rounded ends,
+    over/under weave gaps (#262522) and subtle flat fold tones.
+  -->
+
+  <!-- 1. Left outer descending ribbon (Warm Off-White, underneath at bottom-left valley) -->
+  <path
+    d="M 262 332 L 388 692"
+    fill="none"
+    stroke="#E2DDD3"
+    stroke-width="96"
+    stroke-linecap="round"
+  />
+  <!-- Upper lit face of left outer ribbon (flat fold highlight) -->
+  <path
+    d="M 262 332 L 352 589"
+    fill="none"
+    stroke="#FAF9F6"
+    stroke-width="96"
+    stroke-linecap="round"
+  />
+
+  <!-- 2. Center-right descending ribbon (Warm Terracotta shade, underneath at bottom-right valley & center fold) -->
+  <path
+    d="M 512 362 L 636 692"
+    fill="none"
+    stroke="#C26142"
+    stroke-width="96"
+    stroke-linecap="round"
+  />
+  <!-- Middle lit segment of center-right ribbon -->
+  <path
+    d="M 538 431 L 606 612"
+    fill="none"
+    stroke="#D97757"
+    stroke-width="96"
+    stroke-linecap="round"
+  />
+
+  <!-- Gap cutout before center-left terracotta ribbon weaves OVER left-outer & center-right -->
+  <path
+    d="M 388 692 L 512 362"
+    fill="none"
+    stroke="#262522"
+    stroke-width="126"
+    stroke-linecap="round"
+  />
+  <!-- 3. Center-left ascending ribbon (Warm Terracotta, weaves OVER at left valley & center peak) -->
+  <path
+    d="M 388 692 L 512 362"
+    fill="none"
+    stroke="#D97757"
+    stroke-width="96"
+    stroke-linecap="round"
+  />
+
+  <!-- Gap cutout before right-outer ribbon weaves OVER center-right terracotta ribbon -->
+  <path
+    d="M 636 692 L 762 332"
+    fill="none"
+    stroke="#262522"
+    stroke-width="126"
+    stroke-linecap="round"
+  />
+  <!-- 4. Right outer ascending ribbon (Warm Off-White, weaves OVER at right valley) -->
+  <path
+    d="M 636 692 L 762 332"
+    fill="none"
+    stroke="#FAF9F6"
+    stroke-width="96"
+    stroke-linecap="round"
+  />
+</svg>

@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #D97757;
+  --brand-hover: #C56546;
+  --brand-subtle: rgba(217, 119, 87, 0.12);
+
+  --bg-main: #FAF9F6;
+  --bg-sidebar: #F4F1EA;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FAF8F4;
+  --bg-hover: #EFECE4;
+
+  --border-color: #E8E4DC;
+  --border-strong: #D9D3C7;
+
+  --text-primary: #262522;
+  --text-secondary: #5C5851;
+  --text-muted: #8E897F;
+
+  --logo-ink-start: #1F1E1B;
+  --logo-ink-end: #524D45;
+  --logo-accent-start: #D97757;
+  --logo-accent-end: #B55638;
+  --logo-thread: rgba(217, 119, 87, 0.45);
+}
+
+.dark {
+  --brand: #D97757;
+  --brand-hover: #C56546;
+  --brand-subtle: rgba(217, 119, 87, 0.16);
+
+  --bg-main: #262522;
+  --bg-sidebar: #201F1C;
+  --bg-card: #302E2A;
+  --bg-elevated: #383631;
+  --bg-hover: #3B3934;
+
+  --border-color: #3E3C37;
+  --border-strong: #4F4C45;
+
+  --text-primary: #FAF9F6;
+  --text-secondary: #C7C2B8;
+  --text-muted: #8F8A80;
+
+  --logo-ink-start: #FAF9F6;
+  --logo-ink-end: #CFC8BC;
+  --logo-accent-start: #F29C7E;
+  --logo-accent-end: #D97757;
+  --logo-thread: rgba(242, 156, 126, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei UI", sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.quick-capture-mode,
+html.quick-capture-mode body,
+html.quick-capture-mode #root {
+  background-color: transparent !important;
+  overflow: hidden;
+}
+
+/* Subtle warm scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+input,
+textarea,
+select {
+  user-select: text;
+}

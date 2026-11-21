@@ -1,0 +1,78 @@
+name: Release WeekLoom
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-tauri:
+    env:
+      SIGN_UPDATES: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY != '' }}
+    strategy:
+      fail-fast: false
+      # tauri-action reads, merges and replaces the same latest.json for each target.
+      max-parallel: 1
+      matrix:
+        include:
+          - platform: "windows-latest"
+            args: ""
+          - platform: "macos-latest"
+            args: "--target aarch64-apple-darwin"
+          - platform: "macos-latest"
+            args: "--target x86_64-apple-darwin"
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build and publish WeekLoom via Tauri Action
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tagName: v__VERSION__
+          releaseName: "WeekLoom v__VERSION__"
+          releaseBody: |
+            ## WeekLoom v__VERSION__
+
+            跨平台原生轻量级桌面周报助手，支持随手记录工作碎片、DeepSeek 多岗位智能周报生成与分栏一键复制到企业微信「汇报」。
+
+            ### 安装包说明
+            - **Windows**：下载 `.msi` 或 `.exe` 安装包直接安装
+            - **macOS (Apple Silicon / M1-M4)**：下载 `aarch64.dmg`
+            - **macOS (Intel)**：下载 `x64.dmg`
+          releaseDraft: true
+          prerelease: false
+          generateReleaseNotes: true
+          includeUpdaterJson: ${{ env.SIGN_UPDATES == 'true' }}
+          updaterJsonPreferNsis: true
+          # Without a signing key, build and upload ordinary installers only.
+          args: ${{ matrix.args }} ${{ env.SIGN_UPDATES != 'true' && '--config src-tauri/tauri.unsigned.conf.json' || '' }}
