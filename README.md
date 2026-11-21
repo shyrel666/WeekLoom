@@ -340,7 +340,9 @@ git push origin v0.1.0
 
 4. 构建完成后，前往 GitHub 仓库的 **Releases** 页面检查自动生成的 Draft Release 与全平台安装包，点击 **Publish release** 即可正式发布。
 
-### 一次性启用应用内签名更新
+### 应用内更新签名
+
+WeekLoom 从 v0.1.2 起内置官方更新公钥。后续正式发行沿用同一把私钥。「关于 → 软件更新」在安装前校验更新包签名及其绑定的版本号。以下步骤供首次搭建独立发行渠道的维护者使用。
 
 1. 在仓库根目录使用 Git Bash 或 macOS 终端生成密钥。按提示设置密码，将私钥与密码备份到安全位置，后续发行沿用同一密钥。
 
@@ -350,7 +352,7 @@ git push origin v0.1.0
    cat ~/.tauri/weekloom.key.pub
    ```
 
-2. 将 `.pub` 文件输出的整行公钥填入 `src-tauri/tauri.conf.json` 的 `plugins.updater.pubkey` 并提交。该字段默认为空，应用会通过 GitHub Releases 检查版本并提供当前平台的安装包。
+2. 将 `.pub` 文件输出的整行公钥填入 `src-tauri/tauri.conf.json` 的 `plugins.updater.pubkey` 并提交。独立发行的分支还需将更新清单地址改为自己的 Release 地址。
 
 3. 使用已登录的 GitHub CLI 设置仓库 Secrets。第二条命令会交互式读取生成密钥时设置的密码。
 
